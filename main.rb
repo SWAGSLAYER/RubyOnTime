@@ -10,8 +10,9 @@ end
 
 src_repos = ParserUtils::get_source_repositories(source_repos_file)
 
-ParserUtils::clone_source_repositories(src_repos, dir_path)
+ParserUtils::clone_source_repositories(src_repos, source_repos_path)
 
+puts "#{src_repos}"
 src_repos.each do |repo|
   case repo.language
   when 'C++'
