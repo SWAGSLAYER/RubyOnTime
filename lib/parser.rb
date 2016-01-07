@@ -5,15 +5,15 @@ require_relative 'parser/ruby_parser'
 require_relative 'parser/result'
 
 module Parser
-  def self.parse_cpp(dir_path)
-    CPPParser.new.parse_directory(dir_path)
+  def self.parse_cpp(repo)
+    CPPParser.new.parse_repository(repo)
   end
 
-  def self.parse_java(dir_path)
-    JavaParser.new.parse_directory(dir_path)
+  def self.parse_java(repo)
+    JavaParser.new.parse_repository(repo)
   end
 
-  def self.parse_ruby(dir_path)
-    RubyParser.new.parse_directory(dir_path)
+  def self.parse_ruby(repo)
+    RubyParser.new.parse_repository(repo)
   end
 end

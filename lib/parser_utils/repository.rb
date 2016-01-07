@@ -4,7 +4,7 @@ require 'openssl'
 
 module ParserUtils
   class Repository
-    attr_reader :url, :name, :owner, :language
+    attr_accessor :url, :name, :owner, :language, :path
 
     def initialize(url, name, owner, language)
       @url = url.strip
@@ -29,7 +29,7 @@ module ParserUtils
 
       response = http_client.get(uri.request_uri)
       languages_hash = JSON.parse(response.body)
-      puts "#{languages_hash}"
+      languages_hash.keys[0]
     end
   end
 end

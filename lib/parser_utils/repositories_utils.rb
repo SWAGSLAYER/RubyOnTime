@@ -27,13 +27,20 @@ module ParserUtils
       end
 
       source_repos.each do |repo|
-        shell_cmd = "git clone #{repo.url.strip} #{dir_path}/#{repo.name} -q"
-        print "Cloning #{repo.url} into #{dir_path}/#{repo.name}..."
-        if system(shell_cmd)
-          print "[" + "ok".green + "]"
+        potential_path = "#{dir_path}/#{repo.name}"
+        print "Cloning #{repo.url} into #{potential_path}..."
+        if Dir.exists?(potential_path)
+          print "[" + "exists; skipping".yellow + "]"
         else
-          print "[" + "failed".red + "]"
+          shell_cmd = "git clone #{repo.url.strip} #{dir_path}/#{repo.name} -q"
+
+          if system(shell_cmd)
+            print "[" + "ok".green + "]"
+          else
+            print "[" + "failed".red + "]"
+          end
         end
+        repo.path = potential_path
         puts
       end
     end
@@ -43,6 +50,20 @@ module ParserUtils
       result = $?
         exit_code = result.exitstatus
       return !exit_code.eql?(127)
+    end
+
+    # July's method
+    def self.get_statistics(filename, src_repos, parse_results)
+      # Store in an array first since disk I/O is slower to sort in place
+      csv_rows = []
+      src_repos.each_with_index do |repo, i|
+        current_repo_result = parse_results[i]
+        csv_rows[i].push([repo.url, current_repo_result.total_lines_parsed,
+                          current_repo_result.words_hash.size])
+      end
+
+      # Sort csv_rows by words desc
+      # Write to CSV
     end
   end
 end

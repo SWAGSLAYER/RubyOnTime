@@ -1,11 +1,7 @@
 module Parser
   class RubyParser < LanguageParser
-    def parse_directory(dir_path)
-      super.parse_directory(dir_path)
-    end
-
-    def parse(line)
-      puts "Called RubyParser's parse"
+    def parse_repository(repo)
+      super.parse_directory(repo.path)
     end
   end
 end

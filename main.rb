@@ -1,6 +1,8 @@
 require 'parser'
 require 'parser_utils'
 
+STATISTICS_FILENAME = 'repositories.csv'
+
 source_repos_file = ARGV[0]
 if ARGV[1] == nil
   source_repos_path = ParserUtils::RepositoriesUtils::SOURCE_REPOSITORIES_PATH
@@ -12,17 +14,20 @@ src_repos = ParserUtils::get_source_repositories(source_repos_file)
 
 ParserUtils::clone_source_repositories(src_repos, source_repos_path)
 
-puts "#{src_repos}"
+parse_results = []
 src_repos.each do |repo|
   case repo.language
   when 'C++'
-    parse_result = Parser::parse_cpp("#{source_repos_path}/#{repo.name}")
+    result = Parser::parse_cpp(repo)
   when 'Java'
-    parse_result = Parser::parse_java("#{source_repos_path}/#{repo.name}")
+    result = Parser::parse_java(repo)
   when 'Ruby'
-    parse_result = Parser::parse_ruby("#{source_repos_dir_path}/#{repo.name}")
+    result = Parser::parse_ruby(repo)
   end
 
-  parse_result.to_json()
-  parse_result.to_svg()
+  result.to_json()
+  result.to_svg()
+  parse_results.push(result)
 end
+
+RepositoriesUtils::get_statistics(STATISTICS_FILENAME, src_repos, parse_results)
