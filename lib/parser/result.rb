@@ -28,11 +28,11 @@ module Parser
       # end
     end
 
+		private
     def sort(words_hash)
       # Return the sorted hash here
-      words_hash
+      @words_hash = @words_hash.sort_by { |word, occurences| [-occurences, word] }
+      @words_hash.to_h
     end
-
-    private :sort
   end
 end
