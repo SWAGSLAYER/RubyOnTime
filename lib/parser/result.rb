@@ -1,46 +1,38 @@
 module Parser
-	
-	require 'json'
+  require '../common/language_filemappings'
+  require 'json'
 
-	class Result
-    		attr_reader :words_hash, :marks_count
+  class Result
+    attr_reader :words_hash, :marks_count
 
-   		def initialize(words_hash, marks_count)
-      			@words_hash = self.sort(words_hash)
-      			@marks_count = marks_count
-    		end
+    def initialize(repo, words_hash, marks_count, lines_parsed)
+      @repository = repo
+      @words_hash = self.sort(words_hash)
+      @marks_count = marks_count
+      @lines_parsed = lines_parsed
+    end
 
-    		def to_json
-    		
-    			hash_format = { words: word_counts, marks: marks_count }
-    			
-    			case repo.language
-  				when 'C++'
-  					File.open("cpp.json", "w") do |f|
-  						f.write(hash_format.to_json)
-  					end
-  				when 'Java'
-   					File.open("java.json", "w") do |f|
-  						f.write(hash_format.to_json)
-  					end
-  				when 'Ruby'
-    			 		File.open("ruby.json", "w") do |f|
-  						f.write(hash_format.to_json)
-					end
-  			end
-    			#JSON.pretty_generate(hash_format)
-      			puts "Vanessa's magic here"
-    		end
+    def to_json
+      hash_format = { words: word_counts, marks: marks_count }
 
-    		def to_svg
-      			puts "Pesho's magic here"
-    		end
+      json_filename_mappings = LanguageFilemappings.get_json_filenames()
+      File.open(json_filename_mappings[@repository.language]), "w") do |f|
+        f.write(hash_format.to_json)
+      end
+    end
 
-    		def sort(words_hash)
-      			# Return the sorted hash here
-      			words_hash
-    		end
+    def to_svg
+      svg_filename_mappings = LanguageFilemappings.get_svg_filenames()
+      # File.open(svg_filename_mappings[@repository.language]), "w") do |f|
+        # Pesho's magic here
+      # end
+    end
 
-    	private :sort
-  	end
+    def sort(words_hash)
+      # Return the sorted hash here
+      words_hash
+    end
+
+    private :sort
+  end
 end
