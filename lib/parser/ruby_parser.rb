@@ -1,7 +1,11 @@
 module Parser
   class RubyParser < LanguageParser
+    def initialize()
+      super()
+    end
+
     def parse_repository(repo)
-      super.parse_directory(repo.path)
+      super(repo)
     end
   end
 end

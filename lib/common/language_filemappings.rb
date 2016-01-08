@@ -1,5 +1,5 @@
 class LanguageFilemappings
-  def get_json_filenames
+  def self.get_json_filenames
     json_filenames = {
       "Ruby" => "ruby.json",
       "C++" => "cpp.json",
@@ -7,7 +7,7 @@ class LanguageFilemappings
     }
   end
 
-  def get_svg_filenames
+  def self.get_svg_filenames
     get_svg_filenames = {
       "Ruby" => "ruby.svg",
       "C++" => "cpp.svg",
