@@ -30,4 +30,5 @@ src_repos.each do |repo|
   parse_results.push(result)
 end
 
-RepositoriesUtils::get_statistics(STATISTICS_FILENAME, src_repos, parse_results)
+# July's stuff :)
+# RepositoriesUtils::get_statistics(STATISTICS_FILENAME, src_repos, parse_results)

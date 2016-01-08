@@ -17,13 +17,13 @@ module Parser
 
       json_filename_mappings = LanguageFilemappings.get_json_filenames()
       File.open(json_filename_mappings[@repository.language], "w") do |f|
-        f.write(JSON.pretty_generate(hash_format.to_json))
+        f.write(JSON.pretty_generate(hash_format))
       end
     end
 
     def to_svg
       svg_filename_mappings = LanguageFilemappings.get_svg_filenames()
-      # File.open(svg_filename_mappings[@repository.language]), "w") do |f|
+      # File.open(svg_filename_mappings[@repository.language], "w") do |f|
       # Pesho's magic here
       # end
     end

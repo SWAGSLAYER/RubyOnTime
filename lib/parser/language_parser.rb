@@ -2,6 +2,7 @@ module Parser
   #encoding: UTF-8
   require_relative 'result'
   require_relative '../common/print_views'
+  require 'filemagic'
 
   class LanguageParser
     IGNORED_FILES = ['.', '..', '.git']
@@ -41,7 +42,7 @@ module Parser
     private
     def traverse(path)
       Dir.entries(path).each do |name|
-        if IGNORED_FILES.include? name
+        if IGNORED_FILES.include?(name)
           next
         end
 
@@ -49,8 +50,20 @@ module Parser
         if File.ftype(new_path) == 'directory'
           traverse(new_path)
         else
-          parse_file(new_path)
+          if is_textfile?(new_path)
+            parse_file(new_path)
+          end
         end
+      end
+    end
+
+    private
+    def is_textfile?(filename)
+      begin
+        fm = FileMagic.new(FileMagic::MAGIC_MIME)
+        fm.file(filename) =~ /^text\//
+      ensure
+        fm.close
       end
     end
   end
