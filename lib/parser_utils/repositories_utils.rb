@@ -63,7 +63,13 @@ module ParserUtils
       end
 
       # Sort csv_rows by words desc
+			csv_rows.sort!{ |a, b| b[2] <=> a[2] } ## copy of self
       # Write to CSV
+			CSV.open(filename, "w") do |csv| ## TODO - & ^^
+				csv_rows.each do |row|
+					csv << row
+				end			
+			end
     end
   end
 end
