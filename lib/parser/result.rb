@@ -43,7 +43,7 @@ module Parser
 				file.puts "<?xml version='1.0'?>"
 				file.puts "<svg width='#{(hash_size+1)*space_bars}' height='700' style='background: white' xmlns='http://www.w3.org/2000/svg'>"
 				file.puts "<rect width='#{(hash_size+1)*space_bars}' height='700' style='fill:rgb(0,0,0)' />"
-				my_hash.each do |word,count|
+				words_hash.each do |word,count|
 					counter += 1
 					if counter <= (hash_size)*1/6
 						green += color
