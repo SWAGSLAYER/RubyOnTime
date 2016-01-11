@@ -2,6 +2,7 @@ require_relative 'repository'
 require_relative '../common/string_extensions'
 require 'uri'
 require 'json'
+require 'csv'
 
 module ParserUtils
   class RepositoriesUtils
@@ -52,24 +53,19 @@ module ParserUtils
       return !exit_code.eql?(127)
     end
 
-    # July's method
-    def self.get_statistics(filename, src_repos, parse_results)
+    def self.get_statistics(filename, parse_results)
       # Store in an array first since disk I/O is slower to sort in place
       csv_rows = []
-      src_repos.each_with_index do |repo, i|
-        current_repo_result = parse_results[i]
-        csv_rows[i].push([repo.url, current_repo_result.total_lines_parsed,
-                          current_repo_result.words_hash.size])
+      parse_results.each do |res|
+        csv_rows.push([res.repository.url, res.lines_parsed, res.words_hash.size])
       end
 
-      # Sort csv_rows by words desc
-			csv_rows.sort!{ |a, b| b[2] <=> a[2] } ## copy of self
-      # Write to CSV
-			CSV.open(filename, "w") do |csv| ## TODO - & ^^
-				csv_rows.each do |row|
-					csv << row
-				end			
-			end
+      csv_rows.sort! { |a, b| b[2] <=> a[2] }
+      CSV.open(filename, "wb") do |csv|
+        csv_rows.each do |row|
+          csv << row
+        end
+      end
     end
   end
 end

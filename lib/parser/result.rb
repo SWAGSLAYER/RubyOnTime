@@ -3,7 +3,7 @@ module Parser
   require 'json'
 
   class Result
-    attr_reader :words_hash, :marks_count
+    attr_reader :words_hash, :marks_count, :repository, :lines_parsed
 
     def initialize(repo, words_hash, marks_count, lines_parsed)
       @repository = repo

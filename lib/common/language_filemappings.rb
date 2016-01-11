@@ -1,4 +1,6 @@
 class LanguageFilemappings
+  RESULTS_DIR = "results"
+
   def self.get_json_filenames
     json_filenames = {
       "Ruby" => "ruby.json",
