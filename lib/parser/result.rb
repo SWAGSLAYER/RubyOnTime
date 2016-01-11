@@ -32,7 +32,7 @@ module Parser
 			blue = 0
 			counter = 0
 			hash_size = words_hash.size
-			color.to_f = (1530/hash_size)
+			color = (1530/hash_size).to_f
 			words_hash.each do |a,count|
 				if count >= highest_count
 					highest_count = count
