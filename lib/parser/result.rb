@@ -67,7 +67,7 @@ module Parser
 					file.puts "<rect x='#{new_space}' y='#{500-height}' width='#{SPACE_BETWEEN_BARS}' height='#{height}' style='fill:rgb(#{word_color})' />"
 					file.puts "<text transform='translate(#{new_space+5},510)rotate(90)' font-family='Arial' font-size='24px' style='fill:rgb(#{word_color})'> #{word} </text>"
 				end
-				height = (mark_count*500/highest_count)
+				height = (marks_count*500/highest_count)
 				if height <= 1
 					height = 1
 				end
