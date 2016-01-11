@@ -58,7 +58,7 @@ module Parser
 					elsif counter >= (hash_size)*5/6
 						blue -= color
 					end
-					new_space += SPACE_BETWEEN_BARS
+					new_space += space_bars
 					height = (count*500/highest_count)
 					word_color = "#{red.to_i},#{green.to_i},#{blue.to_i}"
 					if height <= 1
