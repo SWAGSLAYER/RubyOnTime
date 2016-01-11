@@ -41,8 +41,8 @@ module Parser
       svg_filename_mappings = LanguageFilemappings.get_svg_filenames()
       File.open(svg_filename_mappings[@repository.language], "w") do |file|
 				file.puts "<?xml version='1.0'?>"
-				file.puts "<svg width='#{(hash_size+1)*SPACE_BETWEEN_BARS}' height='700' style='background: white' xmlns='http://www.w3.org/2000/svg'>"
-				file.puts "<rect width='#{(hash_size+1)*SPACE_BETWEEN_BARS}' height='700' style='fill:rgb(0,0,0)' />"
+				file.puts "<svg width='#{(hash_size+1)*space_bars}' height='700' style='background: white' xmlns='http://www.w3.org/2000/svg'>"
+				file.puts "<rect width='#{(hash_size+1)*space_bars}' height='700' style='fill:rgb(0,0,0)' />"
 				my_hash.each do |word,count|
 					counter += 1
 					if counter <= (hash_size)*1/6
@@ -64,15 +64,15 @@ module Parser
 					if height <= 1
 						height = 1
 					end
-					file.puts "<rect x='#{new_space}' y='#{500-height}' width='#{SPACE_BETWEEN_BARS}' height='#{height}' style='fill:rgb(#{word_color})' />"
+					file.puts "<rect x='#{new_space}' y='#{500-height}' width='#{space_bars}' height='#{height}' style='fill:rgb(#{word_color})' />"
 					file.puts "<text transform='translate(#{new_space+5},510)rotate(90)' font-family='Arial' font-size='24px' style='fill:rgb(#{word_color})'> #{word} </text>"
 				end
-				height = (marks_count*500/highest_count)
+				height = (mark_count*500/highest_count)
 				if height <= 1
 					height = 1
 				end
-				file.puts "<rect x='#{hash_size*SPACE_BETWEEN_BARS}' y='#{500-height}' width='#{SPACE_BETWEEN_BARS}' height='#{height}' style='fill:rgb(255,255,255)' />"
-				file.puts "<text transform='translate(#{hash_size*SPACE_BETWEEN_BARS+5},510)rotate(90)' font-family='Arial' font-size='24px' style='fill:rgb(255,255,255)'> marks </text>"
+				file.puts "<rect x='#{hash_size*space_bars}' y='#{500-height}' width='#{space_bars}' height='#{height}' style='fill:rgb(255,255,255)' />"
+				file.puts "<text transform='translate(#{hash_size*space_bars+5},510)rotate(90)' font-family='Arial' font-size='24px' style='fill:rgb(255,255,255)'> marks </text>"
 				file.puts "</svg>"
       end
     end
