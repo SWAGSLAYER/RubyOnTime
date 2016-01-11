@@ -42,8 +42,8 @@ module Parser
       svg_filename_mappings = LanguageFilemappings.get_svg_filenames()
       File.open(svg_filename_mappings[@repository.language], "w") do |f|
 				file.puts "<?xml version='1.0'?>"
-				file.puts "<svg width='#{words_hash*space_bars}' height='700' style='background: white' xmlns='http://www.w3.org/2000/svg'>"
-				file.puts "<rect width='#{words_hash*space_bars}' height='700' style='fill:rgb(0,0,0)' />"
+				file.puts "<svg width='#{hash_size}' height='700' style='background: white' xmlns='http://www.w3.org/2000/svg'>"
+				file.puts "<rect width='#{hash_size}' height='700' style='fill:rgb(0,0,0)' />"
 				words_hash.each do |word,count|
 					counter += 1
 					if counter <= hash_size*1/6
