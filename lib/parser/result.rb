@@ -37,6 +37,9 @@ module Parser
 					highest_count = count
 				end
 			end
+			if marks_count >= highest_count
+				highest_count = marks_count	
+			end
 			
       svg_filename_mappings = LanguageFilemappings.get_svg_filenames()
       File.open(svg_filename_mappings[@repository.language], "w") do |file|
