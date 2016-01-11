@@ -33,7 +33,7 @@ module Parser
     private
     def parse_line(line)
       @marks_count += line.scan(/[[:punct:]=`~$^+|<>]/).count
-      line = line.gsub(/0b[0-1]+|0x[\h]+|\d+/, "")
+      line = line.gsub(/0b[0-1]+|0x[\h]+|\d+|_+/, "")
       line_words = line.downcase.scan(/\w+/)
       line_words.each do |word|
         @words_hash[word] += 1
